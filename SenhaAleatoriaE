@@ -1,0 +1,43 @@
+package senha;
+
+import java.security.SecureRandom;
+
+public class SenhaAleatoria {
+    public static void main(String[] args) {
+        int tamanho = 20;         
+        System.out.println("Senha: " + gerarSenha(tamanho));
+    }
+
+    public static String gerarSenha(int tamanho) {
+        
+        String letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        String letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numeros = "0123456789";
+        String simbolos = "!@#$%^&*()-_+=<>?";
+
+        StringBuilder senha = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+
+        senha.append(letrasMinusculas.charAt(random.nextInt(letrasMinusculas.length())));
+        senha.append(letrasMaiusculas.charAt(random.nextInt(letrasMaiusculas.length())));
+        senha.append(numeros.charAt(random.nextInt(numeros.length())));
+        senha.append(simbolos.charAt(random.nextInt(simbolos.length())));
+
+        String todos = letrasMinusculas + letrasMaiusculas + numeros + simbolos;
+        for (int i = senha.length(); i < tamanho; i++) {
+            senha.append(todos.charAt(random.nextInt(todos.length())));
+        }
+        return embaralhar(senha.toString());
+    }
+    public static String embaralhar(String senha) {
+        StringBuilder senhaN = new StringBuilder(senha);
+        SecureRandom random = new SecureRandom();
+        for (int i = 0; i < senha.length(); i++) {
+            int j = random.nextInt(senha.length());
+            char temp = senhaN.charAt(i);
+            senhaN.setCharAt(i, senhaN.charAt(j));
+            senhaN.setCharAt(j, temp);
+        }
+        return senhaN.toString();
+    }
+}
