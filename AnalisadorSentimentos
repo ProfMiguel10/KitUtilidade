@@ -1,0 +1,37 @@
+package exemplo;
+
+public class Sentimentos {
+	private static final String[] palPos = { "bom", "feliz", "alegre", "positivo", "incrível", "ótimo", "perfeito",
+			"excelente", "maravilhoso", "melhor", "best" };
+	private static final String[] palNeg = { "ruim", "péssimo", "negativo", "chato", "decepcionante", "horrível",
+			"terrível", "triste", "pior" };
+
+	private static boolean contaPal(String[] listaPal, String pal) {
+		for (String p : listaPal) {
+			if (p.equalsIgnoreCase(pal)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static String analisarSentimento(String input) {
+		int quantPos = 0;
+		int quantNeg = 0;
+		String[] pals = input.split("\\s+");
+		for (String pal : pals) {
+			if (contaPal(palPos, pal)) {
+				quantPos++;
+			} else if (contaPal(palNeg, pal)) {
+				quantNeg++;
+			}
+		}
+		if (quantPos > quantNeg) {
+			return "Sentimento Positivo";
+		} else if (quantNeg > quantPos) {
+			return "Sentimento Negativo";
+		} else {
+			return "Sentimento Neutro";
+		}
+	}
+}
