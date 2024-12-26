@@ -1,0 +1,52 @@
+package exemplo;
+import java.util.HashMap;
+import java.util.Map;
+public class SentimentoM {
+    private static final Map<String, Integer> palPos = new HashMap<>();
+    private static final Map<String, Integer> palNeg = new HashMap<>();   
+    static {
+        palPos.put("bom", 1);palPos.put("feliz", 1);palPos.put("alegre", 1);palPos.put("positivo", 2);
+        palPos.put("incrível", 3);palPos.put("ótimo", 2);palPos.put("perfeito", 3);palPos.put("excelente", 3);
+        palPos.put("maravilhoso", 3);palPos.put("melhor", 2);palPos.put("best", 2);
+        palNeg.put("ruim", 1);palNeg.put("péssimo", 3);palNeg.put("negativo", 2);palNeg.put("chato", 1);
+        palNeg.put("decepcionante", 2); palNeg.put("horrível", 3); palNeg.put("terrível", 3);palNeg.put("triste", 2);
+        palNeg.put("pior", 3);
+    }
+    private static int contaPal(String[] listaPal, Map<String, Integer> palavras) {
+        int sentimento = 0;
+        for (String p : listaPal) {
+            p = p.toLowerCase(); 
+            if (palavras.containsKey(p)) {
+                sentimento += palavras.get(p);
+          }
+        }
+        return sentimento;
+    }
+    public static String analisarSentimento(String input) {
+        int quantPos = 0;
+        int quantNeg = 0;
+        String[] palavras = input.split(" ");
+        boolean negacao = false; 
+        for (String palavra : palavras) {
+            if (palavra.equalsIgnoreCase("não")) {
+                negacao = true;
+                break;
+            }
+        }
+        for (String palavra : palavras) {
+            quantPos += contaPal(new String[]{palavra}, palPos);
+            quantNeg += contaPal(new String[]{palavra}, palNeg);
+        }
+        if (negacao) {
+            quantPos = quantNeg - quantPos;  
+            quantNeg = -quantPos;
+        }
+        if (quantPos > quantNeg) {
+            return "Sentimento Positivo";
+        } else if (quantNeg > quantPos) {
+            return "Sentimento Negativo";
+        } else {
+            return "Sentimento Neutro";
+        }
+    }
+}
