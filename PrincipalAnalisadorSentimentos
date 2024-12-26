@@ -1,0 +1,17 @@
+package exemplo;
+
+import java.util.Scanner;
+
+public class PrincipalSentimentos {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+
+		System.out.println("Digite uma frase:");
+		String entrada = in.nextLine();
+
+		String sentimento = Sentimentos.analisarSentimento(entrada);
+		System.out.println("Resultado : " + sentimento);
+
+		in.close();
+	}
+}
