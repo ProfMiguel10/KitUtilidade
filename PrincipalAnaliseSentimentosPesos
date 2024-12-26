@@ -1,0 +1,10 @@
+package exemplo;
+
+public class PrincipalSentimentoM {
+
+    public static void main(String[] args) {
+        String entrada= "Aula Excelente , Perfeita , Incrível !";
+        String resultado = SentimentoM.analisarSentimento(entrada);
+        System.out.println("Sentimento da frase: " + resultado);
+    }
+}
