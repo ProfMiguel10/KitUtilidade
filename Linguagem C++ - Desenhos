@@ -1,0 +1,43 @@
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <string>
+
+void limpa() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+int main() {
+    std::vector<std::string> desenhos = {
+        "   O   \n"
+        "  /|\\  \n"
+        "  / \\  \n",
+        
+
+        "   O   \n"
+        "  /|\\  \n"
+        "  / \\  \n",
+
+        "  \\O/  \n"
+        "   |   \n"
+        "  / \\  \n",
+
+        "   O   \n"
+        "  \\|/  \n"
+        "  / \\  \n"
+    };
+
+    while (true) {
+        for (const auto& desenho : desenhos) {
+            limpa();
+            std::cout << desenho;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
+    }
+
+    return 0;
+}
