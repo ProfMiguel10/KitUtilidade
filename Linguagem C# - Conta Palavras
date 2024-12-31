@@ -1,0 +1,18 @@
+using System;
+
+class Program
+{
+    static int contPal(string texto)
+    {
+        var palavras = texto.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        return palavras.Length;
+    }
+
+    static void Main()
+    {
+        Console.Write("Digite um texto: ");
+        string texto = Console.ReadLine();
+        
+        Console.WriteLine($"Número de palavras: {contPal(texto)}");
+    }
+}
